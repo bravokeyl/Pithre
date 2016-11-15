@@ -1,5 +1,21 @@
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
+/*eslint-disable*/
+import {createRouter, NavigationProvider, StackNavigation} from '@exponent/ex-navigation';
+import PithreExNav from './components/exnav';
+import PithreExDrawerNav from './components/exnav/drawerNav';
+/*eslint-enable*/
+
+import PithreAbout from './about';
+import PithreHome from './home';
+
+/* Styles */
+import styles from './styles';
+
+export const Router = createRouter(() => ({
+  home: () => PithreHome,
+  about: () => PithreAbout,
+}));
 
 export default class Pithre extends Component {
   constructor(props){
@@ -38,9 +54,9 @@ export default class Pithre extends Component {
   render(){
     console.info("Pithre: Render");
     return(
-      <View>
-        <Text>Pithre</Text>
-      </View>
+      <NavigationProvider router={Router}>
+        <PithreExDrawerNav />
+      </NavigationProvider>
     );
   }
 }
