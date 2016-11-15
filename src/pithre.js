@@ -11,6 +11,7 @@ import PithreHome from './home';
 import PithreSettings from './components/settings';
 import PithreHelp from './components/help';
 import PithreFeedback from './components/feedback';
+import PithreExTabbedNav from './components/exnav/tabbed';
 
 /* Styles */
 import styles from './styles';
@@ -20,7 +21,8 @@ export const Router = createRouter(() => ({
   about: () => PithreAbout,
   settings: () => PithreSettings,
   help: () => PithreHelp,
-  feedback: () => PithreFeedback
+  feedback: () => PithreFeedback,
+  tabs: () => PithreExTabbedNav,
 }));
 
 export default class Pithre extends Component {
@@ -41,9 +43,9 @@ export default class Pithre extends Component {
     console.info("Pithre: componentWillReceiveProps");
   }
 
-  shouldComponentUpdate(){
-    console.info("Pithre: shouldComponentUpdate");
-  }
+  // shouldComponentUpdate(){
+  //   console.info("Pithre: shouldComponentUpdate");
+  // }
 
   componentWillUpdate(){
     console.info("Pithre: componentWillUpdate");

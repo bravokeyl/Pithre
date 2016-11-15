@@ -3,10 +3,6 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fafafa',
-  },
-  list: {
     backgroundColor: '#fff',
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'rgba(0, 0, 0, .1)',
@@ -19,7 +15,6 @@ export default StyleSheet.create({
     color: '#222',
     margin: 2,
   },
-
   description: {
     fontSize: 12,
     color: '#888',

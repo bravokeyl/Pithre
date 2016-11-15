@@ -24,9 +24,9 @@ export default class PithreHelp extends Component {
     console.info("PithreHelp: componentDidMount");
   }
 
-  componentWillReceiveProps(){
-    console.info("PithreHelp: componentWillReceiveProps");
-  }
+  // componentWillReceiveProps(){
+  //   console.info("PithreHelp: componentWillReceiveProps");
+  // }
 
   // shouldComponentUpdate(){
   //   console.info("PithreHelp: shouldComponentUpdate");
