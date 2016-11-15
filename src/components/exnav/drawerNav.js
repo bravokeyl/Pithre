@@ -91,7 +91,14 @@ export default class PithreExDrawerNav extends Component {
           renderTitle={isSelected => this._renderTitle(e.title, isSelected)}
           renderIcon={isSelected => this._renderIcon(e.icon, isSelected)}
           >
-            <StackNavigation id={e.sid} initialRoute={Router.getRoute(e.route)}/>
+            <StackNavigation id={e.sid}
+              defaultRouteConfig={{
+                navigationBar: {
+                  backgroundColor: '#FF5722',
+                  tintColor: '#fff',
+                }
+              }}
+              initialRoute={Router.getRoute(e.route)}/>
           </DrawerNavigationItem>
         );
       }else {

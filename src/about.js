@@ -13,8 +13,6 @@ export default class PithreAbout extends Component {
   static route = {
     navigationBar: {
       title: 'About',
-      backgroundColor: '#000',
-      color: "#fff",
     },
   }
 

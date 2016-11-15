@@ -11,7 +11,7 @@ export default StyleSheet.create({
     flex: 1,
     height: 168.75,
     width: null,
-    backgroundColor: "#444252"
+    backgroundColor: "#444252",
     // resizeMode: 'cover',
   },
   headerListItem: {
@@ -28,7 +28,7 @@ export default StyleSheet.create({
     width: 40,
   },
   selectedText: {
-    color: '#0084FF',
+    color: '#FF5722',
   },
   selectedItemStyle: {
     backgroundColor: "#E8E8E8",

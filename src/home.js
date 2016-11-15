@@ -13,7 +13,6 @@ export default class PithreHome extends Component {
   static route = {
     navigationBar: {
       title: 'Home',
-      backgroundColor: '#FF5722',
     },
   }
 
