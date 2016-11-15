@@ -106,8 +106,8 @@ const listItems = [
     "id": "ten",
     "icon": "settings",
     "title": "Settings",
-    "sid": "about",
-    "route": "about",
+    "sid": "settings",
+    "route": "settings",
     "subheader": false,
     "style":{
       "marginTop": -16,
@@ -117,8 +117,8 @@ const listItems = [
     "id": "eleven",
     "icon": "help",
     "title": "Help",
-    "sid": "about",
-    "route": "about",
+    "sid": "help",
+    "route": "help",
     "subheader": false,
     "style":{
 
@@ -128,8 +128,8 @@ const listItems = [
     "id": "twelve",
     "icon": "feedback",
     "title": "Feedback",
-    "sid": "about",
-    "route": "about",
+    "sid": "feedback",
+    "route": "feedback",
     "subheader": false,
     "style":{
 

@@ -8,6 +8,9 @@ import PithreExDrawerNav from './components/exnav/drawerNav';
 
 import PithreAbout from './about';
 import PithreHome from './home';
+import PithreSettings from './components/settings';
+import PithreHelp from './components/help';
+import PithreFeedback from './components/feedback';
 
 /* Styles */
 import styles from './styles';
@@ -15,6 +18,9 @@ import styles from './styles';
 export const Router = createRouter(() => ({
   home: () => PithreHome,
   about: () => PithreAbout,
+  settings: () => PithreSettings,
+  help: () => PithreHelp,
+  feedback: () => PithreFeedback
 }));
 
 export default class Pithre extends Component {
