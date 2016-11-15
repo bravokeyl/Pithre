@@ -12,7 +12,28 @@ export default StyleSheet.create({
     height: 168.75,
     width: null,
     backgroundColor: "#444252",
-    // resizeMode: 'cover',
+    resizeMode: 'cover',
+    paddingLeft: 16,
+    justifyContent: "space-around",
+  },
+  headerAvatar: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+  },
+  headerSubtitle:{
+    height: 48,
+    justifyContent: "space-between",
+  },
+  headerName: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#ffffff",
+  },
+  headerEmail: {
+    fontSize: 14,
+    fontWeight: 'normal',
+    color: "#ffffff",
   },
   headerListItem: {
     fontSize: 14,

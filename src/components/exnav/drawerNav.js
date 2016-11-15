@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, Image} from 'react-native';
 /*eslint-disable*/
 import {StackNavigation,DrawerNavigation,DrawerNavigationItem} from '@exponent/ex-navigation';
 /*eslint-enable*/
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {Router} from '../../pithre';
-
+import PithreHeaderCover from './headerCover';
 import listItems from "./list";
+
 
 /* Styles */
 import styles from './styles';
@@ -48,7 +49,7 @@ export default class PithreExDrawerNav extends Component {
 
   _renderHeader(){
     return (
-      <View style={styles.header} />
+      <PithreHeaderCover />
     );
   }
 
