@@ -6,7 +6,6 @@ import {StackNavigation,DrawerNavigation,DrawerNavigationItem} from '@exponent/e
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {Router} from '../../pithre';
 
-import PithreNavItem from './navItem';
 import listItems from "./list";
 
 /* Styles */
