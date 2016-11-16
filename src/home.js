@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 
+import PithreCard from './components/card';
 /* Styles */
 import styles from './styles';
 
@@ -49,7 +50,7 @@ export default class PithreHome extends Component {
     console.info("PithreHome: Render");
     return(
       <View style={styles.container}>
-        <Text>PithreHome</Text>
+        <PithreCard title={"PithreHomeCard"}/>
       </View>
     );
   }
