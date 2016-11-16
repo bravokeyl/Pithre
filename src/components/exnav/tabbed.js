@@ -41,7 +41,7 @@ export default class PithreExTabbedNav extends Component {
       title = 'Second';
     }
 
-    return <Text style={styles.tabLabel}>{title.toUpperCase()}</Text>;
+    return <Text style={styles.tabLabel}><Icon name="home" /></Text>;
   }
 
   render() {
