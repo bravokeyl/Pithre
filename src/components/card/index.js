@@ -1,5 +1,5 @@
-import React, {Component,PropTypes} from 'react';
-import {Text, View} from 'react-native';
+import React, {Component} from 'react';
+import {Text, View, ListView} from 'react-native';
 
 /* Styles */
 import styles from './styles';

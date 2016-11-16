@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 
-import PithreCard from './components/card';
+import PithreListView from './components/card/list';
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 /* Styles */
@@ -61,9 +61,7 @@ export default class PithreHome extends Component {
   render(){
     console.info("PithreHome: Render");
     return(
-      <View style={styles.container}>
-        <PithreCard title={"PithreHomeCard"}/>
-      </View>
+      <PithreListView title={"PithreHomeCard"}/>
     );
   }
 }
