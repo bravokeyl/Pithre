@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity,StatusBar} from 'react-native';
 
 import PithreListView from './components/card/list';
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -8,11 +8,6 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from './styles';
 
 export default class PithreHome extends Component {
-  constructor(props){
-    super(props);
-    console.info("PithreHome: constructor");
-  }
-
   static route = {
     navigationBar: {
       title: 'Home',
@@ -24,9 +19,14 @@ export default class PithreHome extends Component {
               <Icon name="notifications-active" color="#fff" size={24}/>
             </TouchableOpacity>
           </View>
-        )
+        );
       }
     },
+  }
+
+  constructor(props){
+    super(props);
+    console.info("PithreHome: constructor");
   }
 
   componentWillMount(){

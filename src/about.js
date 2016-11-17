@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Text, View, StatusBar} from 'react-native';
+import {Text, View, Picker, StatusBar} from 'react-native';
 
+import PithrePicker from './picker';
 /* Styles */
 import styles from './styles';
 
@@ -8,11 +9,18 @@ export default class PithreAbout extends Component {
   constructor(props){
     super(props);
     console.info("PithreAbout: constructor");
+    this.state = {
+      notif: "Notifications"
+    };
   }
 
   static route = {
+
     navigationBar: {
       title: 'About',
+      renderTitle: (route,params) => {
+        return <PithrePicker />
+      }
     },
   }
 
@@ -48,8 +56,15 @@ export default class PithreAbout extends Component {
   render(){
     console.info("PithreAbout: Render");
     return(
-      <View style={styles.container}>
-        <Text>PithreAbout</Text>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Picker
+          selectedValue={this.state.notif}
+          mode={"dropdown"}
+          onValueChange={(lang) => this.setState({language: lang})}
+          style={{borderWidth:1,borderColor:"red",color:"#000",width: 100}}>
+          <Picker.Item label="All" value="All" />
+          <Picker.Item label="Unread" value="Unread" />
+        </Picker>
       </View>
     );
   }

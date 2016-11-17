@@ -4,7 +4,7 @@ import {Text, View} from 'react-native';
 import {createRouter, NavigationProvider, StackNavigation} from '@exponent/ex-navigation';
 import PithreExNav from './components/exnav';
 import PithreExDrawerNav from './components/exnav/drawerNav';
-/*eslint-enable*/
+
 
 import PithreAbout from './about';
 import PithreHome from './home';
@@ -13,6 +13,8 @@ import PithreHelp from './components/help';
 import PithreFeedback from './components/feedback';
 import PithreExTabbedNav from './components/exnav/tabbed';
 
+import PithreWalkThrough from './components/walkthrough';
+/*eslint-enable*/
 /* Styles */
 import styles from './styles';
 
@@ -23,6 +25,7 @@ export const Router = createRouter(() => ({
   help: () => PithreHelp,
   feedback: () => PithreFeedback,
   tabs: () => PithreExTabbedNav,
+  walkthrough: () => PithreWalkThrough,
 }));
 
 export default class Pithre extends Component {

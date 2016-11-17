@@ -24,9 +24,9 @@ const listItems = [
   {
     "id": "three",
     "icon": "send",
-    "title": "Sent mail",
-    "sid": "tabs",
-    "route": "tabs",
+    "title": "Walkthrough",
+    "sid": "walkthrough",
+    "route": "walkthrough",
     "subheader": false,
     "style":{
 
