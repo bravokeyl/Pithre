@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Text, View, StatusBar} from 'react-native';
 /*eslint-disable*/
-import Swiper from 'react-native-swiper';
+import PithreIntro from './intro';
+import PithreWalk from './walk';
 /*eslint-enable*/
 
 /* Styles */
@@ -17,6 +18,7 @@ export default class PithreWalkThrough extends Component {
   constructor(props){
     super(props);
     console.info("PithreWalkThrough: constructor");
+    this.pithreBorder = this.pithreBorder.bind(this);
   }
 
   componentWillMount(){
@@ -46,17 +48,19 @@ export default class PithreWalkThrough extends Component {
   componentWillUnmount(){
     console.info("PithreWalkThrough: componentWillUnmount");
   }
-
+  pithreBorder(color="red",width = 2){
+    return {
+      borderWidth: width,
+      borderColor: color,
+    };
+  }
   render(){
     console.info("PithreWalkThrough: Render");
     return(
-      <View style={styles.container}>
-        <Text>PithreWalkThrough</Text>
-      </View>
+      <PithreWalk />
     );
   }
 }
 
 PithreWalkThrough.propTypes = {
-
 };

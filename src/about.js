@@ -1,27 +1,28 @@
 import React, {Component} from 'react';
 import {Text, View, Picker, StatusBar} from 'react-native';
-
 import PithrePicker from './picker';
 /* Styles */
 import styles from './styles';
 
 export default class PithreAbout extends Component {
+  static route = {
+
+    navigationBar: {
+      title: (params) => {
+        return params.title || "Site";
+      },
+      renderTitle: (route,params) => {
+        return <PithrePicker />;
+      }
+    },
+  }
+
   constructor(props){
     super(props);
     console.info("PithreAbout: constructor");
     this.state = {
       notif: "Notifications"
     };
-  }
-
-  static route = {
-
-    navigationBar: {
-      title: 'About',
-      renderTitle: (route,params) => {
-        return <PithrePicker />
-      }
-    },
   }
 
   componentWillMount(){

@@ -10,7 +10,9 @@ import styles from './styles';
 export default class PithreHome extends Component {
   static route = {
     navigationBar: {
-      title: 'Home',
+      title: (params) => {
+        return params.title || "Home";
+      },
       renderRight: () => {
         return(
           <View style={{flex:1,flexDirection:'row',alignItems:'center',
