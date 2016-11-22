@@ -70,8 +70,8 @@ export default class PithreTracker extends Component {
     console.info("PithreTracker: componentWillUnmount");
   }
 
-  _onPress(i,c) {
-    // this.props.navigator.push(Router.getRoute('about',{ id: i,title: c}));
+  _onPress(i) {
+    this.props.navigator.push(Router.getRoute('detail',{ id: i}));
   }
 
   _onRefresh() {
@@ -92,7 +92,7 @@ export default class PithreTracker extends Component {
 
   _renderRow(data) {
     return (
-      <TouchableNativeFeedback onPress={() => this._onPress()}>
+      <TouchableNativeFeedback onPress={() => this._onPress(data.id)}>
         <View style={{paddingLeft: 16,paddingRight: 16,paddingBottom: 10,paddingTop: 10,backgroundColor: "#fff",borderBottomWidth: 1,borderColor: "#ccc",}}>
           <View style={{flex:1,justifyContent:'space-between',flexDirection:"row",}}>
             <Text style={{fontFamily:"Roboto",fontSize: 16,color:"#000"}}>{data.id}</Text>
