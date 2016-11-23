@@ -7,6 +7,8 @@ import PithreData from './dtrackers';
 import moment from 'moment';
 import axios from 'axios';
 
+import PithreRow from "./components/row";
+
 // import RefreshableListView from 'react-native-refreshable-listview';
 /* Styles */
 import styles from './styles';
@@ -92,18 +94,9 @@ export default class PithreTracker extends Component {
 
   _renderRow(data) {
     return (
-      <TouchableNativeFeedback onPress={() => this._onPress(data.id)}>
-        <View style={{paddingLeft: 16,paddingRight: 16,paddingBottom: 10,paddingTop: 10,backgroundColor: "#fff",borderBottomWidth: 1,borderColor: "#ccc",}}>
-          <View style={{flex:1,justifyContent:'space-between',flexDirection:"row",}}>
-            <Text style={{fontFamily:"Roboto",fontSize: 16,color:"#000"}}>{data.id}</Text>
-            <Text style={{fontSize: 14,color: data.status ? "green": "red"}}>{data.status ? "InSync": "Not Working"}</Text>
-          </View>
-          <View style={{flex:1,justifyContent:'space-between',flexDirection:"row",}}>
-            <Text style={{fontSize: 14,color:"#333"}}>{moment(data.lastupdated).fromNow()}</Text>
-            <Text style={{fontSize: 14,color: data.status ? "green": "red"}}>{data.status ? "Live": "Offline"}</Text>
-          </View>
-        </View>
-      </TouchableNativeFeedback>
+      <PithreRow leftIcon={"folder"} rightIcon={"more-vert"}
+        primaryText={data.id} secondaryText={moment(data.lastupdated).fromNow()}
+        onPress={() => this._onPress(data.id)} />
     );
   }
 
