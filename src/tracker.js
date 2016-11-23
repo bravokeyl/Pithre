@@ -8,6 +8,7 @@ import moment from 'moment';
 import axios from 'axios';
 
 import PithreRow from "./components/row";
+import PithreRight from "./tright";
 
 // import RefreshableListView from 'react-native-refreshable-listview';
 /* Styles */
@@ -20,14 +21,10 @@ export default class PithreTracker extends Component {
       title: (params) => {
         return params.title || "Home";
       },
-      renderRight: () => {
+      renderRight: ({ config: { eventEmitter } }) => {
+        // console.log("ViewMode",eventEmitter);
         return(
-          <View style={{flex:1,flexDirection:'row',alignItems:'center',
-            justifyContent:'center',marginRight:16}}>
-            <TouchableOpacity style={{width: 48,height: 48,justifyContent:'center',alignItems:"center",}}>
-              <Icon name="notifications-active" color="#fff" size={24}/>
-            </TouchableOpacity>
-          </View>
+          <PithreRight emitter={eventEmitter}/>
         );
       }
     },
@@ -38,13 +35,17 @@ export default class PithreTracker extends Component {
     console.info("PithreTracker: constructor");
     this._onPress = this._onPress.bind(this);
     this._onRefresh = this._onRefresh.bind(this);
+    this._handleViewMode = this._handleViewMode.bind(this);
+    this._renderRow = this._renderRow.bind(this);
     this.state = {
       dataSource: ds.cloneWithRows(PithreData),
       refreshing: false,
+      viewList: true,
     };
   }
 
   componentWillMount(){
+    this._subscription = this.props.route.getEventEmitter().addListener('reset', this._handleViewMode);
     console.info("PithreTracker: componentWillMount");
   }
 
@@ -66,9 +67,14 @@ export default class PithreTracker extends Component {
 
   componentDidUpdate(){
     console.info("PithreTracker: componentDidUpdate");
+    // this.props.navigator.updateCurrentRouteParams({
+    //   listIcon: 1,
+    // });
+    // this._renderRow();
   }
 
   componentWillUnmount(){
+    this._subscription.remove();
     console.info("PithreTracker: componentWillUnmount");
   }
 
@@ -93,29 +99,42 @@ export default class PithreTracker extends Component {
   }
 
   _renderRow(data) {
+    console.log("Rendering Row Again");
     return (
       <PithreRow leftIcon={"folder"} rightIcon={"more-vert"}
         primaryText={data.id} secondaryText={moment(data.lastupdated).fromNow()}
+        viewMode={this.state.viewList}
         onPress={() => this._onPress(data.id)} />
     );
   }
 
+  _handleViewMode(){
+    console.log("HandleVMBefore",this.state.viewList);
+    this.setState({
+      viewList: !this.state.viewList,
+    });
+  }
+
   render(){
     console.info("PithreTracker: Render");
+    console.log("HandleVMAfter",this.state.viewList);
     return(
       <View style={{paddingBottom: 16}}>
-        <ListView
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh}
-          />
-        }
-        dataSource={this.state.dataSource}
-        renderRow={(data) => this._renderRow(data)}
-        onEndReached={() => console.log("ListView end reached")}
-        style={[{padding: 0}]}/>
-      </View>
+        {this.state.viewList ?
+        (
+          <ListView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          }
+          dataSource={this.state.dataSource}
+          renderRow={(data) => this._renderRow(data)}
+          onEndReached={() => console.log("ListView end reached")}
+          style={[{padding: 0}]}/>
+      ): (<Text>Hola!</Text>) }
+    </View>
     );
   }
 }

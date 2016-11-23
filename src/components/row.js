@@ -57,7 +57,7 @@ export default class PithreRow extends Component {
         <TouchableNativeFeedback onPress={() => this.props.onPress(this.props.primaryText)}>
           <View style={[styles.listCol,{flexGrow: 1},]}>
             <Text style={[Gstyles.primaryText]}>{this.props.primaryText}</Text>
-            <Text style={[Gstyles.secondaryText]}>{this.props.secondaryText}</Text>
+            { !this.props.viewMode && (<Text style={[Gstyles.secondaryText]}>{this.props.secondaryText}</Text>)}
           </View>
         </TouchableNativeFeedback>
         <View style={[Gstyles.listRightIcon,styles.listCol,]}>
@@ -71,6 +71,7 @@ export default class PithreRow extends Component {
 PithreRow.propTypes = {
   leftIcon: React.PropTypes.string,
   rightIcon: React.PropTypes.string,
+  viewMode: React.PropTypes.bool,
   primaryText: React.PropTypes.oneOfType([React.PropTypes.string,React.PropTypes.number,]),
   secondaryText: React.PropTypes.oneOfType([React.PropTypes.string,React.PropTypes.number,]),
   onPress: React.PropTypes.func,
