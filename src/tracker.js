@@ -86,7 +86,6 @@ export default class PithreTracker extends Component {
     this.setState({refreshing: true});
     axios.get("https://2fuzad69j3.execute-api.us-east-1.amazonaws.com/dev/devices/")
     .then((res) => {
-      const dso = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
       this.setState({
         refreshing: false,
         dataSource: ds.cloneWithRows(res.data)
