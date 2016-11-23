@@ -119,21 +119,18 @@ export default class PithreTracker extends Component {
     console.info("PithreTracker: Render");
     console.log("HandleVMAfter",this.state.viewList);
     return(
-      <View style={{paddingBottom: 16}}>
-        {this.state.viewList ?
-        (
-          <ListView
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-            />
-          }
-          dataSource={this.state.dataSource}
-          renderRow={(data) => this._renderRow(data)}
-          onEndReached={() => console.log("ListView end reached")}
-          style={[{padding: 0}]}/>
-      ): (<Text>Hola!</Text>) }
+      <View style={{paddingBottom: 16,}}>
+        <ListView
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+          />
+        }
+        dataSource={this.state.dataSource}
+        renderRow={(data) => this._renderRow(data)}
+        onEndReached={() => console.log("ListView end reached")}
+        style={[{padding: 0}]}/>
     </View>
     );
   }

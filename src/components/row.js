@@ -52,16 +52,16 @@ export default class PithreRow extends Component {
     return(
       <View style={[Gstyles.blackDivider,styles.listRow,]}>
         <View style={[Gstyles.listLeftIcon,styles.listCol,]}>
-          <Icon name="folder" size={20} color="green"/>
+          <Icon name={this.props.leftIcon} size={20} color="green"/>
         </View>
         <TouchableNativeFeedback onPress={() => this.props.onPress(this.props.primaryText)}>
           <View style={[styles.listCol,{flexGrow: 1},]}>
             <Text style={[Gstyles.primaryText]}>{this.props.primaryText}</Text>
-            { !this.props.viewMode && (<Text style={[Gstyles.secondaryText]}>{this.props.secondaryText}</Text>)}
+            { this.props.viewMode && (<Text style={[Gstyles.secondaryText]}>{this.props.secondaryText}</Text>)}
           </View>
         </TouchableNativeFeedback>
         <View style={[Gstyles.listRightIcon,styles.listCol,]}>
-          <Icon name="more-vert" size={20} color="rgba(0,0,0,0.54)"/>
+          <Icon name={this.props.rightIcon} size={20} color="rgba(0,0,0,0.54)"/>
         </View>
       </View>
     );
