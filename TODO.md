@@ -1,2 +1,4 @@
 - Fix initial grid layout
 - Load direct data and not from local file
+- Add toolbar dropdown menu
+- Toast on network offline

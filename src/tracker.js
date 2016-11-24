@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, Image, TouchableOpacity,Dimensions, TouchableNativeFeedback, ListView, RefreshControl} from 'react-native';
+import {Text, View, Image, TouchableOpacity,Dimensions, ToastAndroid,TouchableNativeFeedback, ListView, RefreshControl} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import sites from './dsites';
 import {Router} from './pithre';
@@ -83,6 +83,7 @@ export default class PithreTracker extends Component {
   }
 
   _onRefresh() {
+    let self = this;
     this.setState({refreshing: true});
     axios.get("https://2fuzad69j3.execute-api.us-east-1.amazonaws.com/dev/devices/")
     .then((res) => {
@@ -92,8 +93,12 @@ export default class PithreTracker extends Component {
       });
       console.log(res.data);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch((error) => {
+      this.setState({
+        refreshing: false,
+      });
+      ToastAndroid.show(error.toString(), ToastAndroid.LONG,);
+      console.log(error.toString(),typeof error);
     });
   }
 
@@ -101,7 +106,7 @@ export default class PithreTracker extends Component {
     console.log("Rendering Row Again");
     return (
       <PithreRow leftIcon={"folder"} rightIcon={"more-vert"}
-        primaryText={data.id} secondaryText={moment(data.lastupdated).fromNow()}
+        primaryText={data.id} secondaryText={moment(data.lastupdated).format("Do MMM YYYY, HH:mm")}
         viewMode={this.state.viewList}
         onPress={() => this._onPress(data.id)} />
     );
