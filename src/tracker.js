@@ -127,7 +127,6 @@ export default class PithreTracker extends Component {
             onRefresh={this._onRefresh}
           />
         }
-
         dataSource={this.state.dataSource}
         renderRow={(data) => this._renderRow(data)}
         onEndReached={() => console.log("ListView end reached")}

@@ -8,6 +8,7 @@ export default StyleSheet.create({
     flexDirection:"row",
     justifyContent:"space-between",
     height: 72,
+    flexWrap: "wrap",
     borderBottomWidth: 1,
     // flexWrap: "wrap",
   },
