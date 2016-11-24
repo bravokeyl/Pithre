@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, Image, TouchableOpacity, TouchableNativeFeedback, ListView, RefreshControl} from 'react-native';
+import {Text, View, Image, TouchableOpacity,Dimensions, TouchableNativeFeedback, ListView, RefreshControl} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import sites from './dsites';
 import {Router} from './pithre';
@@ -13,6 +13,7 @@ import PithreRight from "./tright";
 // import RefreshableListView from 'react-native-refreshable-listview';
 /* Styles */
 import styles from './styles';
+const {width,height} = Dimensions.get("window");
 const ds = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
 export default class PithreTracker extends Component {
 
@@ -126,10 +127,11 @@ export default class PithreTracker extends Component {
             onRefresh={this._onRefresh}
           />
         }
+
         dataSource={this.state.dataSource}
         renderRow={(data) => this._renderRow(data)}
         onEndReached={() => console.log("ListView end reached")}
-        style={[{padding: 0}]}/>
+        contentContainerStyle={[{padding: 0,flexWrap:"wrap",flexDirection: this.state.viewList?"column":"row",}]}/>
     </View>
     );
   }

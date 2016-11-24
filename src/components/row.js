@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableNativeFeedback} from 'react-native';
+import {Text, View, TouchableNativeFeedback, Dimensions} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import moment from "moment";
+
+const { width, height} = Dimensions.get("window");
 
 /* Styles */
 import Gstyles from '../styles';
 import styles from './styles';
-const borderUtil = function(c="red",w=2){
+const borderUtil = function(c="red",w=0){
   return {
     borderWidth: w,
     borderColor: c,
@@ -50,18 +52,18 @@ export default class PithreRow extends Component {
   render(){
     console.info("PithreRow: Render");
     return(
-      <View style={[Gstyles.blackDivider,styles.listRow,]}>
-        <View style={[Gstyles.listLeftIcon,styles.listCol,]}>
-          <Icon name={this.props.leftIcon} size={20} color="green"/>
+      <View style={[Gstyles.blackDivider,this.props.viewMode? styles.listRow : styles.gridRow,]}>
+        <View style={[this.props.viewMode ? Gstyles.listLeftIcon : Gstyles.gridLeftIcon ,styles.listCol,borderUtil("green")]}>
+          <Icon name={this.props.leftIcon} size={this.props.viewMode ? 20:16} color="green"/>
         </View>
         <TouchableNativeFeedback onPress={() => this.props.onPress(this.props.primaryText)}>
-          <View style={[styles.listCol,{flexGrow: 1},]}>
-            <Text style={[Gstyles.primaryText]}>{this.props.primaryText}</Text>
+          <View style={[styles.listCol,{flexGrow: 1,},borderUtil()]}>
+            <Text style={[this.props.viewMode ?Gstyles.primaryText:Gstyles.primaryTextCondensed]}>{this.props.primaryText}</Text>
             { this.props.viewMode && (<Text style={[Gstyles.secondaryText]}>{this.props.secondaryText}</Text>)}
           </View>
         </TouchableNativeFeedback>
-        <View style={[Gstyles.listRightIcon,styles.listCol,]}>
-          <Icon name={this.props.rightIcon} size={20} color="rgba(0,0,0,0.54)"/>
+        <View style={[this.props.viewMode ?Gstyles.listRightIcon:Gstyles.gridRightIcon,styles.listCol,borderUtil("blue")]}>
+          <Icon name={this.props.rightIcon} size={this.props.viewMode ? 20:16} color="rgba(0,0,0,0.54)" style={[borderUtil("blue")]}/>
         </View>
       </View>
     );
