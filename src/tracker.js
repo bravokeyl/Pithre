@@ -25,7 +25,7 @@ export default class PithreTracker extends Component {
       renderRight: ({ config: { eventEmitter } }) => {
         // console.log("ViewMode",eventEmitter);
         return(
-          <PithreRight emitter={eventEmitter}/>
+          <PithreRight emitter={eventEmitter} />
         );
       }
     },
@@ -46,7 +46,8 @@ export default class PithreTracker extends Component {
   }
 
   componentWillMount(){
-    this._subscription = this.props.route.getEventEmitter().addListener('reset', this._handleViewMode);
+    this._viewmode = this.props.route.getEventEmitter().addListener('viewmode', this._handleViewMode);
+    this._refresh = this.props.route.getEventEmitter().addListener('refresh', this._onRefresh);
     console.info("PithreTracker: componentWillMount");
   }
 
@@ -75,7 +76,8 @@ export default class PithreTracker extends Component {
   }
 
   componentWillUnmount(){
-    this._subscription.remove();
+    this._viewmode.remove();
+    this._refresh.remove();
     console.info("PithreTracker: componentWillUnmount");
   }
 
@@ -113,6 +115,10 @@ export default class PithreTracker extends Component {
     this.setState({
       viewList: !this.state.viewList,
     });
+  }
+
+  _handleRefresh(){
+
   }
 
   render(){

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, Image, TouchableOpacity, TouchableNativeFeedback, ListView, RefreshControl} from 'react-native';
+import {Text, View, Image,Picker, TouchableOpacity, TouchableNativeFeedback, ListView, RefreshControl} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import sites from './dsites';
 import {Router} from './pithre';
@@ -49,13 +49,13 @@ export default class PithreRight extends Component {
     return(
       <View style={{flex:1,flexDirection:'row',alignItems:'center',
         justifyContent:'center',}}>
-        <TouchableOpacity onPress={() => { this.props.emitter.emit('reset');console.log("Emit Reset Event",this.props.emitter);}}
+        <TouchableOpacity onPress={() => { this.props.emitter.emit('viewmode');console.log("Emit Reset Event",this.props.emitter);}}
           style={{width: 48,height: 48,justifyContent:'center',alignItems:"center",}}>
           <Icon name={"view-module"} color="#fff" size={24}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {console.log("More Vert");}}
+        <TouchableOpacity onPress={() => {this.props.emitter.emit('refresh');console.log("Refresh");}}
           style={{width: 48,height: 48,justifyContent:'center',alignItems:"center",}}>
-          <Icon name="more-vert" color="#fff" size={24}/>
+          <Icon name="refresh" color="#fff" size={24}/>
         </TouchableOpacity>
       </View>
     );
