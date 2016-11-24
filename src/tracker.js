@@ -52,6 +52,7 @@ export default class PithreTracker extends Component {
   }
 
   componentDidMount(){
+    this._onRefresh();
     console.info("PithreTracker: componentDidMount");
   }
 
@@ -69,10 +70,6 @@ export default class PithreTracker extends Component {
 
   componentDidUpdate(){
     console.info("PithreTracker: componentDidUpdate");
-    // this.props.navigator.updateCurrentRouteParams({
-    //   listIcon: 1,
-    // });
-    // this._renderRow();
   }
 
   componentWillUnmount(){

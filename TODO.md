@@ -1,0 +1,2 @@
+- Fix initial grid layout
+- Load direct data and not from local file
