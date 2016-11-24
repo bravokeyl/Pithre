@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, Image, TouchableOpacity,Dimensions, ToastAndroid,TouchableNativeFeedback, ListView, RefreshControl} from 'react-native';
+import {Text, View, Image, NetInfo,TouchableOpacity,Dimensions, ToastAndroid,TouchableNativeFeedback, ListView, RefreshControl} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import sites from './dsites';
 import {Router} from './pithre';
@@ -84,21 +84,37 @@ export default class PithreTracker extends Component {
 
   _onRefresh() {
     let self = this;
-    this.setState({refreshing: true});
-    axios.get("https://2fuzad69j3.execute-api.us-east-1.amazonaws.com/dev/devices/")
-    .then((res) => {
-      this.setState({
-        refreshing: false,
-        dataSource: ds.cloneWithRows(res.data)
-      });
-      console.log(res.data);
-    })
-    .catch((error) => {
-      this.setState({
-        refreshing: false,
-      });
-      ToastAndroid.show(error.toString(), ToastAndroid.LONG,);
-      console.log(error.toString(),typeof error);
+    // NetInfo.fetch().done((reach) => {
+    //   console.log('Initial: ' + reach);
+    // });
+    NetInfo.isConnected.fetch().then(isConnected => {
+      if(isConnected) {
+        this.setState({refreshing: true});
+        axios.defaults.timeout = 3000;
+        let s= moment().format("x");
+        // console.log(s);
+        axios.get("https://2fuzad69j3.execute-api.us-east-1.amazonaws.com/dev/devices/")
+        .then((res) => {
+          let e = moment().format("x")-s;
+          this.setState({
+            refreshing: false,
+            dataSource: ds.cloneWithRows(res.data)
+          });
+          console.log(res.data);
+          console.log(e,"After console data",moment().format("x")-s);
+        })
+        .catch((error) => {
+          this.setState({
+            refreshing: false,
+          });
+          ToastAndroid.show(error.message, ToastAndroid.SHORT,);
+          console.info(moment().format("x")-s);
+          console.log(error,error.message,error.response);
+        });
+      } else{
+        ToastAndroid.show("Unable to refresh: Check your network connection, then swipe down to retry.", ToastAndroid.LONG,);
+      }
+      console.info((isConnected ? 'online' : 'offline'));
     });
   }
 
