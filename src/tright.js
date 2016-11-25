@@ -68,5 +68,6 @@ export default class PithreRight extends Component {
 }
 
 PithreRight.propTypes = {
-
+  onPress: React.PropTypes.func,
+  emitter: React.PropTypes.object,
 };
