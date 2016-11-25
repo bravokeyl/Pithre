@@ -1,20 +1,26 @@
 import React, {Component} from 'react';
-import {Text, View, Image, NetInfo,TouchableOpacity,Dimensions, ToastAndroid,TouchableNativeFeedback, ListView, RefreshControl} from 'react-native';
+import {Text, View, Image, NetInfo,TouchableOpacity,Dimensions,Modal, ToastAndroid,TouchableNativeFeedback, ListView, RefreshControl} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import sites from './dsites';
 import {Router} from './pithre';
 import PithreData from './dtrackers';
 import moment from 'moment';
 import axios from 'axios';
-
+import { RadioButtons } from 'react-native-radio-buttons';
 import PithreRow from "./components/row";
 import PithreRight from "./tright";
-
+import PithreRadio from "./components/radio";
 // import RefreshableListView from 'react-native-refreshable-listview';
 /* Styles */
 import styles from './styles';
 const {width,height} = Dimensions.get("window");
 const ds = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
+const rOptions = [
+  "Name Asc",
+  "Name Desc",
+  "Last modified",
+  "Status",
+];
 export default class PithreTracker extends Component {
 
   static route = {
@@ -37,17 +43,21 @@ export default class PithreTracker extends Component {
     this._onPress = this._onPress.bind(this);
     this._onRefresh = this._onRefresh.bind(this);
     this._handleViewMode = this._handleViewMode.bind(this);
+    this._sortBy = this._sortBy.bind(this);
     this._renderRow = this._renderRow.bind(this);
     this.state = {
       dataSource: ds.cloneWithRows(PithreData),
       refreshing: false,
       viewList: true,
+      modalVisible: false,
+      selectedIndex: 3,
     };
   }
 
   componentWillMount(){
     this._viewmode = this.props.route.getEventEmitter().addListener('viewmode', this._handleViewMode);
     this._refresh = this.props.route.getEventEmitter().addListener('refresh', this._onRefresh);
+    this._sortby = this.props.route.getEventEmitter().addListener('sortby', this._sortBy);
     console.info("PithreTracker: componentWillMount");
   }
 
@@ -75,6 +85,7 @@ export default class PithreTracker extends Component {
   componentWillUnmount(){
     this._viewmode.remove();
     this._refresh.remove();
+    this._sortby.remove();
     console.info("PithreTracker: componentWillUnmount");
   }
 
@@ -135,8 +146,30 @@ export default class PithreTracker extends Component {
     });
   }
 
+  _sortBy(){
+    console.log("HandleSortBy",this.state.modalVisible);
+    this.setState({
+      modalVisible: !this.state.modalVisible,
+    });
+  }
+
   _handleRefresh(){
 
+  }
+
+  renderOption(option, selected, onSelect, index){
+    console.log(option,selected,index);
+    return (
+      <PithreRadio onPress={onSelect} key={index} label={option} selected={selected}/>
+    );
+  }
+
+  setSelectedOption(selectedOption,selectedIndex){
+    console.log(selectedOption,selectedIndex,this.state);
+    this.setState({
+      selectedIndex,
+    });
+    setTimeout(()=> this.setState({modalVisible: false,}),100);
   }
 
   render(){
@@ -155,6 +188,22 @@ export default class PithreTracker extends Component {
         renderRow={(data) => this._renderRow(data)}
         onEndReached={() => console.log("ListView end reached")}
         contentContainerStyle={[{padding: 0,flexWrap:"wrap",flexDirection: this.state.viewList?"column":"row",}]}/>
+
+        <Modal
+          animationType={"fade"}
+          transparent
+          visible={this.state.modalVisible}
+          onRequestClose={() => {this.setState({modalVisible:false});}}
+          >
+           <View style={{flex:1,justifyContent:"center",alignItems:"center",backgroundColor:'rgba(0, 0, 0, 0.5)'}}>
+            <View style={{width: width-56,backgroundColor:"#fff",paddingLeft:8,paddingRight:16,paddingTop:16,paddingBottom:16,}}>
+              <Text style={{fontWeight: "bold",fontSize: 18,color: "rgba(0,0,0,0.87)",marginBottom:10,paddingLeft:8,}}>Sort by</Text>
+              <RadioButtons options={rOptions} selectedIndex={this.state.selectedIndex}
+                onSelection={(o,i) => this.setSelectedOption(o,i)}
+                renderOption={this.renderOption}/>
+            </View>
+           </View>
+        </Modal>
     </View>
     );
   }

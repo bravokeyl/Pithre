@@ -58,6 +58,10 @@ export default class PithreRight extends Component {
           style={{width: 48,height: 48,justifyContent:'center',alignItems:"center",}}>
           <Icon name="refresh" color="#fff" size={24}/>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => { this.props.emitter.emit('sortby');console.log("Sort by Icon pressed");}}
+          style={{width: 48,height: 48,justifyContent:'center',alignItems:"center",}}>
+            <Icon name="sort" size={24} color="#fff"/>
+        </TouchableOpacity>
       </View>
     );
   }
